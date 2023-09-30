@@ -1,0 +1,46 @@
+import math
+
+# Define a function that converts a floating-point number to binary representation
+def float_bin(number, places=3):
+    # Split the number into whole and decimal parts
+    wholenumber, decimalnumber = str(number).split(".")
+    wholenumber = int(wholenumber)
+
+    # Convert the decimal part to a float between 0 and 1
+    decimalnumber = float("0." + decimalnumber)
+
+    # Initialize the result string with the binary representation of the whole part
+    res = bin(wholenumber).lstrip("0b") + "."
+
+    # Iterate to calculate the binary representation of the decimal part
+    for _ in range(places):
+        # Multiply the decimal part by 2
+        decimalnumber *= 2
+
+        # Split the result into whole and decimal parts
+        whole, dec = str(decimalnumber).split(".")
+
+        # Add the whole part to the result string
+        res += whole
+
+        # Update the decimal part for the next iteration
+        decimalnumber -= int(whole)
+
+    return res
+
+def main():
+    # Take user input for the floating-point number and desired decimal places
+    n = float(input("Enter floating Number: "))
+    p = int(input("Enter the number of decimal places of the result: "))
+
+    # Call the function and print the result
+    result = float_bin(n, places=p)
+    print("Binary representation:", result)
+
+if __name__ == "__main__":
+    main()
+
+    #output: Enter floating Number: 26.625
+Enter the number of decimal places of the result: 14
+Binary representation: 11010.10100000000000
+
